@@ -2,22 +2,25 @@ package ru.netology.domain;
 
 public class Radio {
     private int currentStation;
-    private int pressNumber;
+    private int stationMax = 9;
+    private int stationMin = 0;
     private int currentVolume;
+    private int volumeMax = 10;
+    private int volumeMin = 0;
 
-    public int getPressNumber() {
-        return pressNumber;
-    }
 
-    public void setPressNumber(int pressNumber) {
-        this.pressNumber = pressNumber;
-    }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
     public void setCurrentStation(int currentStation) {
+        if (currentStation > stationMax) {
+            return;
+        }
+        if (currentStation < stationMin) {
+            return;
+        }
         this.currentStation = currentStation;
     }
 
@@ -27,44 +30,38 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > volumeMax) {
+            return;
+        }
+        if (currentVolume < volumeMin) {
+            return;
+        }
         this.currentVolume = currentVolume;
     }
 
-    public void stationNumberNext(int currentNumber) {
+    public void stationNumberNext() {
 
-        if (currentNumber == 9) {
-            currentStation = 0;
-            return;
+        if (currentStation >= stationMax) {
+            setCurrentStation(stationMin);
+        } else {
+            setCurrentStation(currentStation + 1);
         }
-        currentStation = currentNumber + 1;
-        return;
     }
 
     public void stationNumberPrev() {
-        if (currentStation == 0)
-            currentStation = 10;
-        currentStation--;
-        return;
+        if (currentStation <= stationMin) {
+            setCurrentStation(stationMax);
+        } else {
+            setCurrentStation(currentStation - 1);
+        }
     }
 
     public void stationVolumeUp() {
-        if (currentVolume >= 10) {
-            currentVolume = 10;
-            return;
-        } else {
-            currentVolume++;
-            return;
-        }
+        setCurrentVolume(currentVolume + 1);
     }
 
     public void stationVolumeDown() {
-        if (currentVolume <= 0) {
-            currentVolume = 0;
-            return;
-        } else {
-            currentVolume--;
-            return;
-        }
+        setCurrentVolume(currentVolume - 1);
     }
 
 }

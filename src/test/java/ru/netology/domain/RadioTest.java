@@ -28,7 +28,8 @@ public class RadioTest {
 
     public void stationNumberNext(String name, int currentNumber, int expected) {
         Radio radio = new Radio();
-        radio.stationNumberNext(currentNumber);
+        radio.setCurrentStation(currentNumber);
+        radio.stationNumberNext();
         int actual = radio.getCurrentStation();
         assertEquals(expected, actual);
     }
